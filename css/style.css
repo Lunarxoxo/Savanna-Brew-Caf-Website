@@ -1,0 +1,183 @@
+/* =====================================================
+   Savanna Brew Café – style.css
+   Sections: 1 Variables · 2 Base · 3 Header/Nav · 4 Buttons
+   5 Hero · 6 Home · 7 About · 8 Menu · 9 Gallery · 10 Contact
+   11 Footer · 12 Responsive · 13 Motion/Dark mode
+   Flexbox: nav bar, cards, split layout (rows that must stay one-dimensional)
+   Grid: gallery, footer, form (true rows AND columns)
+   ===================================================== */
+
+/* 1. VARIABLES */
+
+
+:root {
+  --brown: #98360589; /* primary: coffee brown */
+  --cream: #F5E9DA; /* secondary: cream */
+  --orange: #D9822B; /* accent: savanna orange */
+  --ink: #2B1B12; /* dark text */
+  --white: #FFFFFF;
+  --roast: #4c240d; /* dark surfaces: footer, menu bars */
+  --paper: #FFFFFF;
+  --line: color-mix(in srgb, var(--brown) 25%, var(--cream));
+  --link: #6F4E37;
+  --head: "Playfair Display", Georgia, serif;
+  --body: "Open Sans", Arial, sans-serif;
+  --shape: 0 24px 0 24px;
+}
+
+
+
+/* 2. BASE */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:1rem/1.7 var(--body);color:var(--ink);background:var(--paper)}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--head);line-height:1.2;margin:0 0 .6em}
+h1{font-size:clamp(2.3rem,5.5vw,4rem)}
+h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+h3{font-size:1.3rem}
+p{margin:0 0 1em}
+a{color:var(--link);text-underline-offset:3px;transition:color .25s}
+a:hover{color:var(--orange)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+section{padding:4rem 0}
+.alt{background:var(--cream)}
+.skip{position:absolute;left:-999px}
+.skip:focus{left:1rem;top:1rem;z-index:99;background:var(--white);color:var(--ink);padding:.6rem 1rem}
+.stripe{height:10px;background:var(--stripe)}
+
+/* 3. HEADER & NAV (identical on all pages) */
+.site-header{background:var(--paper);position:sticky;top:0;z-index:20}
+.nav-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.6rem 0}
+.logo img{width:200px;height:auto}
+.nav-bar ul{display:flex;gap:.3rem;list-style:none;margin:0;padding:0}
+.nav-bar a{display:block;padding:.5rem 1.1rem;border-radius:999px;color:var(--ink);font-weight:600;text-decoration:none;transition:background .25s,color .25s}
+.nav-bar a:hover,.nav-bar a:focus-visible{background:var(--cream);color:var(--link)}
+.nav-bar a.active{background:var(--brown);color:var(--white)}
+
+/* 4. BUTTONS */
+.btn{display:inline-block;padding:.85rem 1.8rem;border-radius:999px;border:2px solid var(--orange);background:var(--orange);color:#2B1B12;font:700 1rem var(--body);text-decoration:none;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s,color .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(43,27,18,.3);background:var(--roast);border-color:var(--roast);color:var(--white)}
+.btn-ghost{background:transparent;border-color:var(--white);color:var(--white)}
+.btn-ghost:hover{background:var(--white);border-color:var(--white);color:var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.8rem}
+
+/* 5. HERO BANNERS */
+.hero{min-height:80vh;display:flex;align-items:center;color:var(--white);padding:5rem 0;
+  background:linear-gradient(100deg,rgba(43,27,18,.92) 25%,rgba(43,27,18,.25)),url("../images/hero.jpg") center/cover}
+.hero-copy{max-width:38rem}
+.hero p{font-size:1.15rem;max-width:32rem}
+.page-hero{color:var(--white);padding:4.5rem 0;
+  background:linear-gradient(rgba(111,78,55,.85),rgba(111,78,55,.85)),url("../images/hero.jpg") center/cover}
+.page-hero h1{margin-bottom:.2em}
+.page-hero p{font:italic 1.35rem var(--head);margin:0}
+
+/* 6. HOME */
+.intro{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:start}
+.intro p{font-size:1.1rem;max-width:62ch}
+.steps{display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{flex:1;counter-increment:s;padding:1.4rem;border-left:5px solid var(--orange);background:var(--paper)}
+.steps li::before{content:counter(s);display:block;font:700 2.6rem/1 var(--head);color:var(--orange);margin-bottom:.4rem}
+.steps strong{font-family:var(--head);font-size:1.25rem}
+.cards{display:flex;gap:1.5rem}
+.card{flex:1 1 0;background:var(--cream);border-radius:var(--shape);border-top:5px solid var(--orange);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 30px rgba(43,27,18,.25)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.card-body{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem}
+.card h3{margin:0}
+.price{background:var(--orange);color:#2B1B12;font-weight:700;padding:.25rem .9rem;border-radius:999px;white-space:nowrap}
+.cta{background:var(--brown);color:var(--white);text-align:center}
+.cta p{max-width:46ch;margin-inline:auto}
+
+/* 7. ABOUT */
+.split{display:flex;gap:3.5rem;align-items:center}
+.split figure{flex:0 0 38%;margin:0}
+.split img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:32px;border:4px solid var(--orange)}
+blockquote{margin:2rem 0 0;padding:1rem 1.6rem;border-left:6px solid var(--orange);background:var(--cream);font:italic 1.25rem/1.6 var(--head)}
+blockquote cite{display:block;margin-top:.5rem;font:600 .95rem var(--body);font-style:normal}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;list-style:none;margin:0;padding:0}
+.values li{background:var(--paper);border-radius:var(--shape);border-top:5px solid var(--brown);padding:1.6rem}
+.values strong{display:block;font:700 1.4rem var(--head);margin-bottom:.3rem}
+
+/* 8. MENU */
+.menu-block{margin-bottom:3rem}
+.menu-block h2{margin:0;padding:.7rem 1.3rem;background:var(--roast);color:var(--white);border-radius:18px 18px 0 0;font-size:1.6rem}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-top:0;border-radius:0 0 18px 18px}
+table{width:100%;min-width:480px;border-collapse:collapse}
+thead{background:var(--brown);color:var(--white)}
+th,td{padding:.85rem 1.2rem;text-align:left}
+th:last-child,td:last-child{text-align:right;white-space:nowrap}
+tbody th{font-weight:700}
+tbody tr{transition:background .2s}
+tbody tr:nth-child(odd){background:var(--paper)}
+tbody tr:nth-child(even){background:var(--cream)}
+tbody tr:hover{background:color-mix(in srgb,var(--orange) 30%,#FFFFFF);color:#2B1B12}
+.note{border-left:6px solid var(--orange);background:var(--cream);padding:1rem 1.4rem;font-weight:600}
+
+.menu-page{padding:3rem 0}
+
+/* 9. GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.gallery-grid figure{margin:0;overflow:hidden;background:var(--cream);border-radius:var(--shape)}
+.gallery-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s}
+.gallery-grid figure:hover img{transform:scale(1.1)}
+.gallery-grid figcaption{padding:.7rem 1rem;font:700 1.05rem var(--head)}
+
+/* 10. CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.panel{background:var(--cream);border-radius:var(--shape);border-top:5px solid var(--orange);padding:2rem}
+.panel h2{font-size:1.7rem}
+.field{margin-bottom:1.1rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{display:block;margin-bottom:.3rem;font-weight:600}
+input,select,textarea{width:100%;padding:.7rem .9rem;border:2px solid var(--line);border-radius:10px;background:var(--white);color:#2B1B12;font:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--orange);outline-offset:1px;border-color:var(--orange)}
+fieldset{margin:0 0 1.1rem;padding:.6rem 1rem 1rem;border:2px solid var(--line);border-radius:10px}
+legend{padding:0 .4rem;font-weight:600}
+.radios{display:flex;flex-wrap:wrap;gap:1.4rem}
+.radios label{display:flex;align-items:center;gap:.4rem;margin:0;font-weight:400}
+.radios input{width:auto;accent-color:var(--brown)}
+address{font-style:normal;margin-bottom:1rem}
+.hours{margin-bottom:1.2rem;min-width:0}
+.hours th,.hours td{padding:.5rem .8rem}
+.map{width:100%;height:260px;border:0;border-radius:12px;margin-bottom:1rem}
+
+/* 11. FOOTER (identical on all pages) */
+.site-footer{background:var(--roast);color:#F5E9DA}
+.foot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:3rem 0 2rem}
+.site-footer h3{color:var(--white);font-size:1.2rem}
+.site-footer a{color:var(--orange)}
+.site-footer a:hover{color:var(--white)}
+.site-footer ul{list-style:none;margin:0;padding:0}
+.site-footer address{margin:0}
+.copy{margin:0;padding:1rem 0;border-top:1px solid rgba(255,255,255,.2);text-align:center;font-size:.9rem}
+
+/* 12. RESPONSIVE */
+@media (max-width:900px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:768px){
+  .site-header{position:static}
+  .nav-bar{flex-direction:column;align-items:flex-start}
+  .nav-bar ul{flex-direction:column;width:100%}
+  .cards,.split,.steps{flex-direction:column}
+  .split figure{flex-basis:auto;width:100%}
+  .intro,.contact-grid,.foot-grid,.values{grid-template-columns:1fr}
+  .hero{min-height:auto;padding:3.5rem 0}
+  section{padding:2.8rem 0}
+}
+@media (max-width:560px){
+  .gallery-grid,.two{grid-template-columns:1fr}
+}
+
+/* 13. MOTION & DARK MODE (bonus) */
+.hero h1,.hero p,.hero .btn-row{animation:rise .9s ease-out both}
+.hero p{animation-delay:.2s}
+.hero .btn-row{animation-delay:.4s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#211510;--cream:color-mix(in srgb,#6F4E37 35%,#2B1B12);--ink:#F5E9DA;--line:color-mix(in srgb,#6F4E37 55%,#2B1B12);--link:#D9822B}
+  .nav-bar a.active,.cta{background:var(--brown);color:var(--white)}
+}
